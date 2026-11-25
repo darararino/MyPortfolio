@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RARA ART GALLERY · 3D Portfolio</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- PART 1: NAVIGATION BAR -->
+<header class="nav">
+  <!-- Logo: replace the <span> with <img src="logo.png" alt="Rara"> if you like -->
+  <a class="logo" href="#" aria-label="Rara"><span class="logo-text">RARA</span></a>
+  <nav aria-label="Sections">
+    <button type="button" data-go="1">Projects</button>
+    <button type="button" data-go="2">About</button>
+    <button type="button" data-go="3">Works</button>
+    <button type="button" data-go="5">Side Quest</button>
+    <button type="button" data-go="6">Contact</button>
+  </nav>
+  <a class="talk" href="mailto:rarachmaidha10@gmail.com">Let's Talk ↗</a>
+</header>
+
+<!-- PART 2: THE STAGE -->
+<main id="stage">
+  <div id="word" aria-hidden="true">PORTFOLIO</div>
+  <p id="depot">RARA ART GALLERY · <b>7 CONTAINERS</b> · 2026</p>
+  <div id="rail" aria-hidden="true"></div>
+  <div id="claw" aria-hidden="true">
+    <div class="car"></div><div class="rod"></div>
+    <div class="head"><i class="fg l"><b></b></i><i class="fg r"><b></b></i></div>
+  </div>
+
+  <!-- Faces, doors and buttons of every container are built by script.js.
+       Edit the content inside each .wall below. -->
+
+  <!-- CONTAINER 01: HELLO (COMPACT WITH PROFILE PHOTO) -->
+  <div class="box" style="--c:#e5322d;--k:#a91f1b;--a:#ff6b63" data-l1="PORT" data-l2="FOLIO" data-tag="RARA" data-name="Portfolio">
+    <div class="wall" inert><div class="c">
+      <div class="hero-profile">
+        <img class="hero-photo" src="images/rara-profile.jpeg" alt="Aidha Rachma (Rara)">
+        <div class="hero-info">
+          <div class="kick">01 / HELLO</div>
+          <h2 tabindex="-1">Hi, I'm <em>Rara.</em></h2>
+          <p>A 3D Artist crafting stylized characters, environments, and game-ready props. Every container in the pile holds a piece of my creative journey.</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 02: THE PROJECTS (WIDE) -->
+  <div class="box wide" style="--c:#f26a1f;--k:#b84a10;--a:#ff9150" data-l1="PRO" data-l2="JECTS" data-tag="02" data-name="The Projects">
+    <div class="wall" inert><div class="c">
+      <div class="kick">02 / TEAM GAME PROJECTS</div>
+      <h2 tabindex="-1">The <em>projects.</em></h2>
+
+      <div class="cards">
+        <!-- Project 01: D'Greek Cook -->
+        <article class="card">
+          <div class="card-head">
+            <h3>D'Greek Cook (v1.2)</h3>
+            <a class="card-btn" href="https://faliharydhka.itch.io/dgreek-cook" target="_blank" rel="noopener noreferrer">Playable Build ↗</a>
+          </div>
+          <p class="card-meta"><strong>Role:</strong> 3D Prop Artist · <strong>Timeline:</strong> October 2024 – May 2025 (10-Person Cross-Disciplinary Team)</p>
+          <p class="card-badge">🏆 GameJam+ Global 2024 Finalist · Miracle Academy Best Gameplay Nominee</p>
+
+          <div class="card-media">
+            <figure class="media-slot">
+              <img src="images/dgreek-gameplay.png" alt="D'Greek Cook In-Game Screenshot" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>In-Game Stage · <code>images/dgreek-gameplay.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <img src="images/dgreek-assets.png" alt="D'Greek Cook 3D Kitchen Props" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Kitchen Props · <code>images/dgreek-assets.png</code></figcaption>
+            </figure>
+          </div>
+
+          <p class="card-sub">The Challenge & My Role</p>
+          <p class="card-text">Building <em>D'Greek Cook</em>—a fast-paced Greek mythology cooking game created by a 10-person team—meant solving a classic game-art challenge: making dozens of on-screen kitchen props look appealing while keeping performance lightweight and gameplay readable from a top-down camera. As the 3D Prop Artist, I took ownership of designing and modeling the game's core interactive properties in Blender, including geometric-patterned Greek plates, kitchen knives, wooden bowls, cutting boards, and mythological horned altars.</p>
+          <p class="card-sub">Technical Execution & Impact</p>
+          <p class="card-text">Rather than relying on dense meshes, I prioritized strict topology optimization by minimizing vertex and face counts, removing redundant edge loops, and leveraging smooth shading to preserve clean, stylized silhouettes without taxing frame rates. I also maintained tight color-style consistency so players could quickly distinguish ingredients and utensils amidst hectic timer-based stages. This balance of aesthetic clarity and technical discipline helped propel our team to become a GameJam+ Global 2024 Finalist and a Best Gameplay Nominee at Miracle Academy.</p>
+        </article>
+
+        <!-- Project 02: Carnifall -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Carnifall</h3>
+            <a class="card-btn" href="https://notclarr.itch.io/carnifall" target="_blank" rel="noopener noreferrer">Playable Build ↗</a>
+          </div>
+          <p class="card-meta"><strong>Role:</strong> 3D Prop & Weapon Artist · <strong>Timeline:</strong> July 2025 – August 2025 (10-Person Cross-Disciplinary Team)</p>
+          <p class="card-badge">🏆 Top 40 Student Category — GAMESEED 2025</p>
+
+          <div class="card-media">
+            <figure class="media-slot">
+              <img src="images/carnifall-gameplay.png" alt="Carnifall In-Game Arena" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>In-Game Arena · <code>images/carnifall-gameplay.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <img src="images/carnifall-assets.png" alt="Carnifall 3D Environment Props" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Environment Props · <code>images/carnifall-assets.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <img src="images/carnifall-weaponassets.png" alt="Carnifall 3D Weapons and Totems" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Weapons & Totems · <code>images/carnifall-weaponassets.png</code></figcaption>
+            </figure>
+          </div>
+
+          <p class="card-sub">The Challenge & My Role</p>
+          <p class="card-text">Developed in a fast-paced two-month sprint for GAMESEED 2025 by a 10-person team, <em>Carnifall</em> blends third-person shooter action with tower defense mechanics inside a whimsical circus arena. As the 3D Prop Artist, I was responsible for building both hero combat/defense items—such as a stylized star revolver, harlequin mallet, sword, and theatrical mask totems—and atmospheric environment props including jack-in-the-box crates, treasure trunks, a popcorn cart, bunting banners, and giant patterned balloons in Blender.</p>
+          <p class="card-sub">Technical Execution & Impact</p>
+          <p class="card-text">Because third-person cameras bring players close to weapons and defenses while enemy waves demand high frame rates, I tackled computational bottlenecks by crafting ultra-low-geometry meshes engineered to maintain a high-poly visual illusion. By pairing disciplined polygon reduction with smooth shading and bold stylized color blocking, every prop retained crisp silhouettes and rich surface detail without straining runtime performance—helping the team secure a Top 40 Student Category placement at GAMESEED 2025.</p>
+        </article>
+
+        <!-- Project 03: Squid Down -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Squid Down</h3>
+            <a class="card-btn" href="https://verondesu.itch.io/squid-down" target="_blank" rel="noopener noreferrer">Playable Build ↗</a>
+          </div>
+          <p class="card-meta"><strong>Role:</strong> 3D Character & Prop Modeler · <strong>Timeline:</strong> November 2025 (GameJam+ Global 2025 Entry) · <strong>Tools:</strong> Blender</p>
+
+          <div class="card-media">
+            <figure class="media-slot">
+              <img src="images/squiddown-gameplay.png" alt="Squid Down Gameplay" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>In-Game Descent · <code>images/squiddown-gameplay.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <img src="images/squiddown-assets.png" alt="Squid Down Lokie and Pipe Assets" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>Lokie & Modular Pipes · <code>images/squiddown-assets.png</code></figcaption>
+            </figure>
+          </div>
+
+          <p class="card-sub">The Challenge & My Role</p>
+          <p class="card-text">Created for GameJam+ Global 2025, <em>Squid Down</em> is a high-speed endless descender starring Lokie, a small octopus navigating past fans, platforms, and industrial pipes to set new depth records. Working in Blender and Houdini as the 3D Modeler, I took charge of modeling both the playable character (with multiple facial expressions) and the modular pipe obstacles that form the core hazards of the descent.</p>
+          <p class="card-sub">Technical Execution & Impact</p>
+          <p class="card-text">In a fast-moving vertical game, players rely on split-second visual cues to dodge obstacles. To solve this, I deliberately contrasted Lokie's soft, organic silhouette against sharp-edged, dark metallic pipe structures so hazards read instantaneously on screen. Behind the scenes, I enforced clean low-poly topology and efficient UV mapping across every modular pipe piece—preventing memory spikes during endless obstacle spawning and keeping player maneuvering consistently smooth.</p>
+        </article>
+
+        <!-- Project 04: Baabaa & Beepow (Animated Video Slots) -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Baabaa & Beepow</h3>
+            <a class="card-btn" href="https://romonour.itch.io/baabaa-beepow" target="_blank" rel="noopener noreferrer">Playable Build ↗</a>
+          </div>
+          <p class="card-meta"><strong>Role:</strong> 3D Character & Animation Artist · <strong>Timeline:</strong> June 2026 (GAMESEED 2026) · <strong>Tools:</strong> Blender, Unity</p>
+
+          <div class="card-media">
+            <figure class="media-slot">
+              <img src="images/baabaa-beepow.png" alt="Baabaa & Beepow In-Game Unity Screenshot" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>In-Game Unity Build · <code>images/baabaa-beepow.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <video src="images/baabaa-beepow.mp4" autoplay loop muted playsinline aria-label="Beepow Alien Animation Cycle" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')"></video>
+              <figcaption>Beepow Animation Cycle · <code>images/baabaa-beepow.mp4</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <video src="images/baabaa-sheep.mp4" autoplay loop muted playsinline aria-label="Baabaa Sheep & Unity Animator" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')"></video>
+              <figcaption>Baabaa & Possession State · <code>images/baabaa-sheep.mp4</code></figcaption>
+            </figure>
+          </div>
+
+          <p class="card-sub">The Challenge & My Role</p>
+          <p class="card-text"><em>Baabaa & Beepow</em> is a cooperative puzzle-platformer centered around an Alien and a Sheep whose signature mechanic allows the Alien to possess the Sheep to overcome obstacles. Stepping in as the 3D Artist (Modeling & Animation), I created both stylized character models and took ownership of the technical animation pipeline from Blender into Unity, where seamless state transitions were critical to making the possession mechanic feel responsive.</p>
+          <p class="card-sub">Technical Execution & Impact</p>
+          <p class="card-text">Moving animated characters from a 3D tool into a game engine often exposes pipeline friction, and I tackled these bottlenecks head-on by troubleshooting and resolving FBX export–import issues—fixing broken rigs, missing meshes, and unrecognized animation clips. I then connected the Unity Animator Controller directly to the team's gameplay code, ensuring every character state and the core possession mechanic executed reliably in the live build.</p>
+        </article>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 03: ABOUT ME (COMPACT) -->
+  <div class="box" style="--c:#1d55d8;--k:#123a9c;--a:#6f9bff" data-l1="ABOUT" data-l2="ME" data-tag="03" data-name="About Me">
+    <div class="wall" inert><div class="c">
+      <div class="kick">03 / ABOUT ME</div>
+      <h2 tabindex="-1">A little <em>about</em> me.</h2>
+      <div class="about-copy">
+        <p>Hi! My name is <strong>Aidha Rachma Noersinda</strong>, you can call me <strong>Rara</strong>.</p>
+        <p>Game Technology student at PENS focusing on 3D modeling, low-poly optimization, and texture baking in Blender. I build characters, environments, and props with foundational rigging and animation ready for Unity pipelines.</p>
+        <p>Actively leading student development as <strong>Head of PSDM at BSO GT (Badan Semi Otonom Teknologi Game)</strong> and organizing English programs as <strong>Event Planner at E2C</strong>.</p>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 04: THE WORKS (WIDE) -->
+  <div class="box wide" style="--c:#f6b919;--k:#c08a0a;--a:#ffd23f" data-l1="THE" data-l2="WORKS" data-tag="04" data-name="The Works">
+    <div class="wall" inert><div class="c">
+      <div class="kick">04 / SOLO & ACADEMIC 3D</div>
+      <h2 tabindex="-1">The <em>works.</em></h2>
+
+      <div class="cards">
+        <!-- Work 01: Matcha Cake -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Matcha Cake</h3>
+            <span class="card-tag">Independent Practice</span>
+          </div>
+          <p class="card-meta"><strong>Timeline:</strong> December 2024 · ~2 Weeks (First 3D Project) · <strong>Tools:</strong> Blender</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <img src="images/work-matcha-cake.png" alt="Matcha Cake 3D Render" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Prop Render · <code>images/work-matcha-cake.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Matcha Cake marks my first self-directed 3D project, completed over two weeks in Blender to master core modeling, shading, and lighting workflows. By constructing modular layers—from the sponge base and piped cream to organic matcha drips, whipped swirls, and blueberries—I practiced balancing soft stylized silhouettes with contrasting matte and glossy materials, establishing a solid technical foundation for my subsequent 3D work.</p>
+        </article>
+
+        <!-- Work 02: Isometric Bedroom -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Isometric Bedroom</h3>
+            <span class="card-tag">Independent Practice</span>
+          </div>
+          <p class="card-meta"><strong>Timeline:</strong> January 2025 · ~1 Week (Second 3D Project) · <strong>Tools:</strong> Blender</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <img src="images/work-isometric-bedroom.png" alt="Isometric Bedroom 3D Diorama" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Environment Diorama · <code>images/work-isometric-bedroom.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Created in one week as my second independent Blender project, Isometric Bedroom expanded my focus from single props to full environment composition. I modeled both the cutaway room architecture and a suite of stylized furniture and miniature props—including a bed, nightstand, lamp, and shelf decor—using subtle bevels and a cohesive cool-blue and warm-wood palette to achieve a clean, readable diorama.</p>
+        </article>
+
+        <!-- Work 03: Fozzy Character -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Fozzy Character</h3>
+            <span class="card-tag">Independent Practice</span>
+          </div>
+          <p class="card-meta"><strong>Timeline:</strong> January 2025 · ~1 Week (First 3D Character Project) · <strong>Tools:</strong> Blender</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <img src="images/work-fozzy.png" alt="Fozzy 3D Character Model" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>3D Character Model · <code>images/work-fozzy.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Fozzy Character represents my first venture into 3D character modeling, completed within a one-week self-directed sprint in Blender. Focusing on stylized proportions, clean symmetry, and smooth surface transitions, I sculpted and modeled an expressive fox character on a presentation pedestal—establishing the foundational character workflow I later applied to rigged game characters.</p>
+        </article>
+
+        <!-- Work 04: Stylized Laptop -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Stylized Laptop</h3>
+            <span class="card-tag">Coursework Assignment</span>
+          </div>
+          <p class="card-meta"><strong>Course:</strong> Visual Expression Design · <strong>Timeline:</strong> March 2025 · ~1 Day (Third 3D Project) · <strong>Tools:</strong> Blender</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <img src="images/work-laptop.jpg" alt="Stylized Laptop Hard-Surface Model" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>Hard-Surface Prop · <code>images/work-laptop.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Built in roughly one day for my Visual Expression Design coursework, this Stylized Laptop tested my hard-surface modeling speed and precision in Blender. I modeled the chassis, hinges, trackpad, and individual chiclet keyboard keys with clean edge control and a crisp two-tone navy and tan finish—proving my ability to deliver detailed hard-surface assets under a 24-hour turnaround.</p>
+        </article>
+
+        <!-- Work 05: Owl Teacher Character -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Owl Teacher Character</h3>
+            <span class="card-tag">College 3D Final Project</span>
+          </div>
+          <p class="card-meta"><strong>Timeline:</strong> June 2026 · <strong>Tools:</strong> Blender 3D (Modeling, UV Mapping, Rigging, Animation)</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <video src="images/work-owl-chef.mp4" autoplay loop muted playsinline aria-label="Owl Teacher Rigged & Animated Character" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')"></video>
+              <figcaption>Rigged & Animated Character · <code>images/work-owl-chef.mp4</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Developed as my 3D Art & Animation Final Project (June 2026), this Owl Teacher Character showcases my ability to manage a complete character pipeline from initial mesh to final animation. I handled low-poly modeling, UV mapping, custom rigging, and keyframe animation in Blender—optimizing edge flow and rig deformation around the wings and body so every teaching gesture executed smoothly and cleanly upon export.</p>
+        </article>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 05: TOOLKIT (COMPACT) -->
+  <div class="box" style="--c:#97a1ad;--k:#6c7682;--a:#dce2eb" data-l1="TOOL" data-l2="KIT" data-tag="05" data-name="Toolkit">
+    <div class="wall" inert><div class="c">
+      <div class="kick">05 / TOOLKIT</div>
+      <h2 tabindex="-1">What's in the <em>box.</em></h2>
+
+      <div class="tool-groups">
+        <div class="tool-group">
+          <span class="tool-label">3D Art & Animation</span>
+          <div class="chips"><span>Blender</span><span>Mixamo</span></div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-label">Game Engine & Dev</span>
+          <div class="chips"><span>Unity</span><span>C#</span><span>Git / GitHub</span><span>VS Code</span></div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-label">UI/UX & Visual Design</span>
+          <div class="chips"><span>Figma</span><span>Canva</span></div>
+        </div>
+        <div class="tool-group">
+          <span class="tool-label">Generative AI Workflow</span>
+          <div class="chips"><span>Antigravity</span><span>Tripo AI</span><span>Ollama</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 06: SIDE QUEST (WIDE) -->
+  <div class="box wide" style="--c:#e5322d;--k:#a91f1b;--a:#ff8a84" data-l1="SIDE" data-l2="QUEST" data-tag="06" data-name="Side Quest">
+    <div class="wall" inert><div class="c">
+      <div class="kick">06 / CROSS-DISCIPLINARY</div>
+      <h2 tabindex="-1">Side <em>quests.</em></h2>
+
+      <div class="cards">
+        <!-- Side Quest 01: His Only Trophy -->
+        <article class="card">
+          <div class="card-head">
+            <h3>His Only Trophy</h3>
+            <a class="card-btn" href="https://intip.in/HisOnlyTrophy" target="_blank" rel="noopener noreferrer">Playable Prototype ↗</a>
+          </div>
+          <p class="card-meta"><strong>Role:</strong> Solo Project · Interactive Narrative & UI/UX Designer · <strong>Timeline:</strong> June 2026 · <strong>Tools:</strong> Figma</p>
+          <div class="card-media">
+            <figure class="media-slot">
+              <img src="images/sidequest-hisonlytrophy.png" alt="His Only Trophy Final Figma UI/UX" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>Final Figma UI/UX · <code>images/sidequest-hisonlytrophy.png</code></figcaption>
+            </figure>
+            <figure class="media-slot">
+              <img src="images/sidequest-hisonlytrophyraw.png" alt="His Only Trophy Wireframe & User Flow" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>Wireframe & User Flow · <code>images/sidequest-hisonlytrophyraw.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text"><em>His Only Trophy</em> marks my very first UI/UX project, where I taught myself Figma from the ground up while designing an interactive Victorian-era historical romance visual novel (June 2026). To ensure a smooth, barrier-free player experience, I mapped out intuitive dialogue and menu flows paired with a carefully curated color palette, distinct button states, and period-inspired UI motifs—demonstrating my ability to quickly master new design tools and apply color and visual hierarchy to player-facing interfaces.</p>
+        </article>
+
+        <!-- Side Quest 02: Downtown Brew -->
+        <article class="card">
+          <div class="card-head">
+            <h3>Downtown Brew</h3>
+            <a class="card-btn" href="https://rawrsky.itch.io/downtown-brew" target="_blank" rel="noopener noreferrer">Playable Build ↗</a>
+          </div>
+          <p class="card-meta"><strong>Context:</strong> Generative AI for Games Workshop · <strong>Stack:</strong> Unity (C#), Antigravity, Tripo AI</p>
+          <div class="card-media single">
+            <figure class="media-slot">
+              <img src="images/sidequest-downtownbrew.png" alt="Downtown Brew Unity AI Prototype" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <figcaption>Unity Gameplay & AI Assets · <code>images/sidequest-downtownbrew.png</code></figcaption>
+            </figure>
+          </div>
+          <p class="card-text">Developed for my Generative AI for Games Workshop (<em>Workshop Kecerdasan Buatan Generatif Untuk Game</em>), this project focused on critically analyzing the mechanics, workflow, and technical guardrails of using an AI Agent inside a Unity pipeline rather than relying on blind code generation. By pairing Antigravity for concept structuring and C# scripting with Tripo AI for 3D asset generation, I mapped out how the agent plans and executes multi-step tasks—maintaining strict human-in-the-loop oversight to prevent script context drift, broken Unity component bindings, and unoptimized 3D mesh topology. The result is a playable prototype paired with a clear technical methodology for integrating generative AI into game production safely and effectively.</p>
+        </article>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- CONTAINER 07: SAY HELLO (COMPACT) -->
+  <div class="box" style="--c:#2546b8;--k:#172f80;--a:#8fa7ff" data-l1="SAY" data-l2="HELLO" data-tag="07" data-name="Say Hello">
+    <div class="wall" inert><div class="c">
+      <div class="kick">07 / SAY HELLO</div>
+      <h2 tabindex="-1">Got an <em>idea?</em></h2>
+      <p>Open for 3D Artist internships, freelance commissions, or game collaborations. Let's build something cool together!</p>
+      <!-- Add social / Google Drive / video links by copying one <a> -->
+      <div class="pills">
+        <a href="mailto:rarachmaidha10@gmail.com" style="--p:#ff6b63">Email Me ↗</a>
+        <a href="https://www.linkedin.com/in/aidha-rachma/" target="_blank" rel="noopener noreferrer" style="--p:#6fe0b0">LinkedIn ↗</a>
+        <a href="https://www.instagram.com/rralbum.zip?gwpx=MTVwa3YwMXBsNHFibQ==" target="_blank" rel="noopener noreferrer" style="--p:#8fa7ff">Instagram ↗</a>
+      </div>
+    </div></div>
+  </div>
+
+  <div id="hint">PICK A CONTAINER ↓</div>
+</main>
+
+<!-- IMAGE & VIDEO LIGHTBOX -->
+<div id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Media Preview">
+  <button type="button" id="lb-close" aria-label="Close preview">✕</button>
+  <img id="lb-img" src="" alt="">
+  <video id="lb-vid" controls loop playsinline hidden></video>
+  <p id="lb-cap"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
