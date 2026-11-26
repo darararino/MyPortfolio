@@ -97,8 +97,8 @@ body{display:flex;flex-direction:column;height:100dvh;
 /* Inner wall (content) */
 .wall{position:absolute;inset:0;transform:translateZ(2px);
   display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;pointer-events:auto;
-  padding:clamp(.8em,1.6vw,1.15em) clamp(.85em,1.8vw,1.3em);
-  font-size:clamp(12.5px,calc(var(--h)*.052),15.5px);text-align:center;color:#dbe6f7;
+  padding:clamp(.95em,2vw,1.35em) clamp(1.05em,2.4vw,1.75em);
+  font-size:clamp(14px,calc(var(--h)*.052),17.5px);text-align:center;color:#dbe6f7;
   background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 3px,transparent 3px 8px),#0b1a40;
   scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
 /* Wide case-study containers (02, 04, 06 — full-width inner wall) */
@@ -109,7 +109,7 @@ body{display:flex;flex-direction:column;height:100dvh;
 .c{width:100%;opacity:0;transition:opacity .45s ease;position:relative;z-index:2}
 .box.open .c{opacity:1;transition-delay:.25s}
 .kick{color:var(--a);font-weight:800;font-size:.78em;letter-spacing:.2em}
-.wall h2{margin:.16em 0 .45em;font:700 clamp(1.55em,2.8vw,2.05em)/.95 'Clash Display',sans-serif;color:#fff;outline:none}
+.wall h2{margin:.16em 0 .45em;font:700 clamp(1.65em,3vw,2.15em)/.95 'Clash Display',sans-serif;color:#fff;outline:none}
 .wall h2 em{font:italic 400 1.08em 'Instrument Serif',serif;color:var(--a)}
 .wall p{margin:0 auto;max-width:36em;line-height:1.45}
 
@@ -121,15 +121,15 @@ body{display:flex;flex-direction:column;height:100dvh;
   display:grid;place-items:center;transition:background .2s,transform .2s}
 .close-box:hover{background:rgba(255,255,255,.22);transform:scale(1.06)}
 
-/* Profile Photo in Container 01 (PORTFOLIO — fluidly scales) */
-.hero-profile{display:flex;align-items:center;gap:clamp(.85em,1.8vw,1.3em);text-align:left;max-width:44em;margin:0 auto}
-.hero-photo{flex:none;width:clamp(5.4em,11.5vw,8em);height:clamp(5.4em,11.5vw,8em);border-radius:1em;object-fit:cover;object-position:center top;
-  border:3px solid var(--a);box-shadow:0 10px 24px rgba(0,0,0,.45);background:rgba(255,255,255,.08)}
-.hero-info h2{margin:.1em 0 .22em}
-.hero-info p{margin:0;max-width:none;font-size:.94em;line-height:1.45}
+/* Profile Photo in Container 01 (PORTFOLIO — larger & well-proportioned) */
+.hero-profile{display:flex;align-items:center;gap:clamp(1.1em,2.4vw,1.7em);text-align:left;max-width:46em;margin:0 auto;padding:0 .4em}
+.hero-photo{flex:none;width:clamp(7.2em,14vw,9.8em);height:clamp(7.2em,14vw,9.8em);border-radius:1.15em;object-fit:cover;object-position:center top;
+  border:3px solid var(--a);box-shadow:0 12px 28px rgba(0,0,0,.45);background:rgba(255,255,255,.08)}
+.hero-info h2{margin:.1em 0 .28em;font-size:clamp(1.75em,3.2vw,2.25em)}
+.hero-info p{margin:0;max-width:none;font-size:.96em;line-height:1.48}
 
 /* About Me paragraphs (inside compact box) */
-.about-copy{display:grid;gap:.4em;max-width:38em;margin:0 auto;font-size:.91em;line-height:1.42}
+.about-copy{display:grid;gap:.45em;max-width:40em;margin:0 auto;font-size:.93em;line-height:1.45}
 .about-copy strong{color:#fff}
 
 /* STAR Case Study Cards (inside wide boxes — full-width left-to-right & breathable spacing) */
@@ -172,15 +172,15 @@ body{display:flex;flex-direction:column;height:100dvh;
 #lb-close:hover{background:rgba(255,255,255,.25)}
 
 /* Categorized Toolkit (inside compact box) */
-.tool-groups{display:grid;gap:.42em;max-width:38em;margin:0 auto}
-.tool-group{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.32em .48em}
-.tool-label{font-size:.71em;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
-.chips{display:flex;flex-wrap:wrap;gap:.32em;justify-content:center}
-.chips span{padding:.2em .74em;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);font-weight:700;font-size:.8em;color:#fff}
+.tool-groups{display:grid;gap:.45em;max-width:40em;margin:0 auto}
+.tool-group{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.35em .5em}
+.tool-label{font-size:.72em;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
+.chips{display:flex;flex-wrap:wrap;gap:.35em;justify-content:center}
+.chips span{padding:.22em .78em;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);font-weight:700;font-size:.82em;color:#fff}
 
 /* Contact Pills */
-.pills{display:flex;flex-wrap:wrap;gap:.48em;justify-content:center;margin-top:.75em}
-.pills a{position:relative;z-index:5;background:var(--p);color:#0b1a40;font-weight:800;text-decoration:none;padding:.42em 1.05em;border-radius:99px;cursor:pointer;pointer-events:auto}
+.pills{display:flex;flex-wrap:wrap;gap:.5em;justify-content:center;margin-top:.8em}
+.pills a{position:relative;z-index:5;background:var(--p);color:#0b1a40;font-weight:800;text-decoration:none;padding:.44em 1.1em;border-radius:99px;cursor:pointer;pointer-events:auto}
 .pills a:hover{filter:brightness(1.1)}
 
 /* TABLETS & SMALL LAPTOPS */
@@ -198,7 +198,8 @@ body{display:flex;flex-direction:column;height:100dvh;
   #rail{top:16px}
   #claw{top:7px}
   #stage{--lf:.23}
-  .hero-profile{flex-direction:column;text-align:center;gap:.65em}
+  .hero-profile{flex-direction:column;text-align:center;gap:.75em}
+  .hero-photo{width:6.8em;height:6.8em}
   .box.wide .wall{padding:.8em}
   .box.wide .card{padding:.9em .95em}
   .card-media{grid-template-columns:1fr}

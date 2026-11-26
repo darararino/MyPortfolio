@@ -92,34 +92,35 @@
 
   function geo(i, lift) {
     if (lift) {
-      const topSafe = (ph || shortH) ? 62 : 92;
-      const botSafe = (ph || shortH) ? sh - 16 : sh - 68;
-      const availH = Math.max(190, botSafe - topSafe);
-      const availW = sw - (ph ? 20 : 64);
+      const topSafe = (ph || shortH) ? 62 : 90;
+      const botSafe = (ph || shortH) ? sh - 16 : sh - 62;
+      const availH = Math.max(200, botSafe - topSafe);
+      const availW = sw - (ph ? 20 : 60);
       const centerY = topSafe + availH / 2;
 
       if (boxes[i].classList.contains('wide')) {
-        const d = ph ? Math.min(58, availW * .11) : Math.min(82, availW * .085);
-        const doorMargin = ph ? d * .30 : d * 1.45;
-        const w = Math.min(760, Math.max(255, availW * (ph ? .92 : .76) - doorMargin));
-        const h = Math.min(400, Math.max(200, availH * .72));
+        const d = ph ? Math.min(58, availW * .11) : Math.min(86, availW * .088);
+        const doorMargin = ph ? d * .30 : d * 1.42;
+        const w = Math.min(800, Math.max(255, availW * (ph ? .92 : .78) - doorMargin));
+        const h = Math.min(420, Math.max(210, availH * .75));
         return {
           w, h, d,
           x: sw / 2,
           y: centerY,
-          t: `translateZ(10px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
+          t: `translateZ(12px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
         };
       }
 
-      const targetW = ph ? availW * .86 : Math.min(540, availW * .48);
-      const targetH = ph ? Math.min(270, availH * .54) : Math.min(255, availH * .46);
-      const S = Math.max(1.1, Math.min(targetW / W, targetH / H));
+      // Generous, crisp sizing for Profile (01), About (03), Toolkit (05), and Contact (07)
+      const targetW = ph ? availW * .90 : Math.min(720, availW * .64);
+      const targetH = ph ? Math.min(340, availH * .68) : Math.min(340, availH * .64);
+      const S = Math.max(1.25, Math.min(targetW / W, targetH / H));
       const w = W * S, h = H * S, d = DP * S;
       return {
         w, h, d,
         x: sw / 2,
         y: centerY,
-        t: `translateZ(10px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
+        t: `translateZ(14px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
       };
     }
 
@@ -155,7 +156,7 @@
     claw.style.left = x + 'px';
     claw.style.setProperty('--rod', rod + 'px');
     claw.style.setProperty('--half', (g.w * 1.04 / 2) + 'px');
-    claw.style.setProperty('--fh', Math.min(130, g.h * .44) + 'px');
+    claw.style.setProperty('--fh', Math.min(135, g.h * .45) + 'px');
     claw.classList.toggle('open', open);
   }
 
