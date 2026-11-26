@@ -25,7 +25,7 @@
     [.97, 1.43, -13, -18, 9]     // 6: SAY HELLO (mid right)
   ];
 
-  // Build faces, doors and the real <button> for each container
+  // Build faces, doors, inner close button, and the real <button> for each container
   boxes.forEach((b, i) => {
     const d = b.dataset;
     const lbl = `<span class="lbl">${d.l1}<br>${d.l2}</span>`;
@@ -36,7 +36,19 @@
          <div class="door dr"><span class="out">${lbl}<span class="tag">${d.tag}</span></span><span class="in"></span></div>
        </div>
        <button type="button" class="hit" aria-label="Open ${d.name} container"></button>`);
-    b.querySelector('.hit').addEventListener('click', () => req(i));
+
+    const c = b.querySelector('.c');
+    c.insertAdjacentHTML('afterbegin',
+      `<div class="wall-top"><button type="button" class="close-box" aria-label="Close ${d.name} container">✕</button></div>`);
+    c.querySelector('.close-box').addEventListener('click', e => {
+      e.stopPropagation();
+      req(-1);
+    });
+
+    b.querySelector('.hit').addEventListener('click', e => {
+      e.stopPropagation();
+      req(i);
+    });
     b.querySelector('.wall').addEventListener('click', e => e.stopPropagation());
   });
 
@@ -51,7 +63,7 @@
     });
   });
 
-  let sw, sh, ph, shortH, W, H, DP, visW, visH, held = -1, busy = false, next = null;
+  let sw, sh, ph, shortH, W, H, DP, visW, visH, held = -1, targetIdx = -1, busy = false, next = null;
 
   function measure() {
     sw = stage.clientWidth;
@@ -79,34 +91,34 @@
 
   function geo(i, lift) {
     if (lift) {
-      const topSafe = (ph || shortH) ? 58 : 82;
-      const botSafe = (ph || shortH) ? sh - 12 : sh - 52;
-      const availH = Math.max(210, botSafe - topSafe);
-      const availW = sw - (ph ? 18 : 44);
+      const topSafe = (ph || shortH) ? 62 : 90;
+      const botSafe = (ph || shortH) ? sh - 14 : sh - 58;
+      const availH = Math.max(200, botSafe - topSafe);
+      const availW = sw - (ph ? 20 : 56);
       const centerY = topSafe + availH / 2;
 
       if (boxes[i].classList.contains('wide')) {
-        const d = ph ? Math.min(80, availW * .15) : Math.min(140, availW * .13);
-        const doorMargin = ph ? d * .25 : d * .95;
-        const w = Math.min(1060, Math.max(260, availW - doorMargin));
-        const h = Math.min(620, Math.max(200, availH - d * .18));
+        const d = ph ? Math.min(68, availW * .13) : Math.min(105, availW * .10);
+        const doorMargin = ph ? d * .30 : d * 1.35;
+        const w = Math.min(880, Math.max(260, availW * (ph ? .94 : .86) - doorMargin));
+        const h = Math.min(490, Math.max(210, availH * .82));
         return {
           w, h, d,
           x: sw / 2,
           y: centerY,
-          t: `translateZ(36px) rotateX(${ph ? -4 : -5}deg) rotateY(${ph ? -4 : -7}deg) rotateZ(0deg)`
+          t: `translateZ(18px) rotateX(${ph ? -3 : -4}deg) rotateY(${ph ? -3 : -5}deg) rotateZ(0deg)`
         };
       }
 
-      const targetW = ph ? availW * .92 : Math.min(720, availW * .64);
-      const targetH = ph ? Math.min(340, availH * .68) : Math.min(340, availH * .58);
-      const S = Math.max(1.2, Math.min(targetW / W, targetH / H));
+      const targetW = ph ? availW * .88 : Math.min(620, availW * .56);
+      const targetH = ph ? Math.min(310, availH * .62) : Math.min(300, availH * .52);
+      const S = Math.max(1.15, Math.min(targetW / W, targetH / H));
       const w = W * S, h = H * S, d = DP * S;
       return {
         w, h, d,
         x: sw / 2,
         y: centerY,
-        t: `translateZ(36px) rotateX(${ph ? -4 : -5}deg) rotateY(${ph ? -4 : -7}deg) rotateZ(0deg)`
+        t: `translateZ(18px) rotateX(${ph ? -3 : -4}deg) rotateY(${ph ? -3 : -5}deg) rotateZ(0deg)`
       };
     }
 
@@ -135,14 +147,14 @@
     s.zIndex = lift ? 60 : 1 + Math.round(g.y / sh * 50);
   }
 
-  const cTop = g => g.y - g.h / 2 - g.d * .10;
+  const cTop = g => g.y - g.h / 2 - g.d * .08;
   const rodFor = g => Math.max(10, cTop(g) - ((ph || shortH) ? 68 : 88));
 
   function setClaw(x, rod, g, open) {
     claw.style.left = x + 'px';
     claw.style.setProperty('--rod', rod + 'px');
     claw.style.setProperty('--half', (g.w * 1.04 / 2) + 'px');
-    claw.style.setProperty('--fh', Math.min(160, g.h * .50) + 'px');
+    claw.style.setProperty('--fh', Math.min(145, g.h * .46) + 'px');
     claw.classList.toggle('open', open);
   }
 
@@ -184,10 +196,25 @@
     boxes[i].querySelector('h2').focus({ preventScroll: true });
   }
 
-  function req(i) { if (busy) { next = i; return; } loop(i); }
+  function req(i) {
+    if (busy) {
+      // Ignore duplicate clicks on the container already being opened so it won't auto-close
+      if (i === targetIdx && i !== -1) return;
+      next = i;
+      return;
+    }
+    loop(i);
+  }
+
   async function loop(i) {
     busy = true;
-    while (i != null) { next = null; await run(i); i = next; }
+    while (i != null) {
+      targetIdx = i;
+      next = null;
+      await run(i);
+      i = next;
+    }
+    targetIdx = -1;
     busy = false;
   }
 
@@ -234,7 +261,7 @@
     }
   });
   document.querySelector('.logo').addEventListener('click', e => { e.preventDefault(); if (held >= 0) req(-1); });
-  stage.addEventListener('click', e => { if (held >= 0 && !e.target.closest('.box')) req(-1); });
+  stage.addEventListener('click', e => { if (!busy && held >= 0 && !e.target.closest('.box')) req(-1); });
 
   function layout() {
     measure();
