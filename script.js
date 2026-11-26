@@ -4,24 +4,25 @@
   const boxes = [...document.querySelectorAll('.box')];
   const RM = matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Responsive pile coordinates: [x, y, rotateX, rotateY, rotateZ]
+  // Ground-anchored pile layout: [xFraction, rowOffsetInH, rotateX, rotateY, rotateZ]
+  // rowOffsetInH measures distance upward from the bottom floor in multiples of container height (H)
   const DESK = [
-    [.48, .61, -14, -24, 6],
-    [.13, .81, -16, 28, 16],
-    [.36, .84, -12, -20, -10],
-    [.60, .82, -14, 24, 12],
-    [.86, .80, -16, -30, -14],
-    [.25, .63, -14, 30, -12],
-    [.73, .63, -14, -26, 16]
+    [.49, 1.54, -14, -22, 5],   // 0: PORTFOLIO (upper center)
+    [.14, .62,  -15, 25,  13],  // 1: PROJECTS (bottom left)
+    [.375, .60, -12, -18, -8],  // 2: ABOUT ME (bottom mid-left)
+    [.615, .61, -13, 22,  10],  // 3: THE WORKS (bottom mid-right)
+    [.86, .63,  -15, -26, -12], // 4: TOOL KIT (bottom right)
+    [.26, 1.52, -13, 26,  -10], // 5: SIDE QUEST (upper left)
+    [.73, 1.52, -13, -24, 13]   // 6: SAY HELLO (upper right)
   ];
   const PHONE = [
-    [.50, .56, -12, -16, 4],
-    [.19, .86, -14, 20, 12],
-    [.50, .88, -10, -14, -8],
-    [.82, .85, -14, 18, 10],
-    [.21, .71, -12, 22, -10],
-    [.51, .73, -12, -18, 8],
-    [.80, .70, -14, -20, 12]
+    [.50, 2.42, -12, -16, 4],   // 0: PORTFOLIO (top)
+    [.19, .62,  -14, 20,  11],  // 1: PROJECTS (bottom left)
+    [.50, .60,  -10, -14, -7],  // 2: ABOUT ME (bottom center)
+    [.81, .62,  -14, 18,  10],  // 3: THE WORKS (bottom right)
+    [.21, 1.52, -12, 22,  -9],  // 4: TOOL KIT (mid left)
+    [.50, 1.50, -12, -18, 7],   // 5: SIDE QUEST (mid center)
+    [.79, 1.52, -14, -20, 11]   // 6: SAY HELLO (mid right)
   ];
 
   // Build faces, doors and the real <button> for each container
@@ -58,16 +59,18 @@
     ph = sw <= 680;
     shortH = sh <= 480;
 
-    // Scale base container size from both width and height so piles never clip
-    const base = Math.min(sw * (ph ? .40 : .20), sh * (ph ? .23 : .34));
-    W = ph ? Math.min(180, Math.max(125, base)) : Math.min(295, Math.max(180, base));
+    // Balance width against available horizontal columns and stage height so boxes never crowd or clip
+    const maxByWidth = ph ? sw * .37 : (sw - 48) / 4.75;
+    const maxByHeight = ph ? sh * .21 : sh * .32;
+    const base = Math.min(maxByWidth, maxByHeight);
+
+    W = ph ? Math.min(175, Math.max(118, base)) : Math.min(285, Math.max(170, base));
     H = W * (ph ? .60 : .43);
     DP = W * (ph ? .52 : .38);
   }
 
   function geo(i, lift) {
     if (lift) {
-      // Dynamic safe boundaries between top rail/claw and bottom hint pill
       const topSafe = (ph || shortH) ? 62 : 84;
       const botSafe = (ph || shortH) ? sh - 12 : sh - 54;
       const availH = Math.max(210, botSafe - topSafe);
@@ -76,7 +79,6 @@
 
       if (boxes[i].classList.contains('wide')) {
         const d = ph ? Math.min(85, availW * .16) : Math.min(145, availW * .13);
-        // Reserve room for opened 3D doors so they stay inside the screen edges
         const doorMargin = ph ? d * .25 : d * .95;
         const w = Math.min(1060, Math.max(260, availW - doorMargin));
         const h = Math.min(620, Math.max(200, availH - d * .18));
@@ -88,7 +90,6 @@
         };
       }
 
-      // Flexible sizing for compact containers (01, 03, 05, 07)
       const targetW = ph ? availW * .92 : Math.min(720, availW * .64);
       const targetH = ph ? Math.min(340, availH * .68) : Math.min(340, availH * .58);
       const S = Math.max(1.2, Math.min(targetW / W, targetH / H));
@@ -102,10 +103,11 @@
     }
 
     const r = ph ? PHONE[i] : DESK[i];
+    const floorY = sh - (ph ? 14 : 24);
     return {
       w: W, h: H, d: DP,
       x: r[0] * sw,
-      y: r[1] * sh,
+      y: floorY - H * r[1],
       t: `translateZ(0px) rotateX(${r[2]}deg) rotateY(${r[3]}deg) rotateZ(${r[4]}deg)`
     };
   }
