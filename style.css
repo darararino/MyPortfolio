@@ -100,15 +100,15 @@ body{display:flex;flex-direction:column;height:100dvh;
   font-size:clamp(13px,calc(var(--h)*.052),16.5px);text-align:center;color:#dbe6f7;
   background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 3px,transparent 3px 8px),#0b1a40;
   scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.35) transparent}
-/* Wide case-study containers (02, 04, 06) */
-.box.wide .wall{padding:clamp(1em,2.2vw,1.5em) clamp(1em,2.5vw,1.8em);font-size:clamp(13px,calc(var(--h)*.028),16px)}
+/* Wide case-study containers (02, 04, 06 — spacious wall & thin-bordered cards) */
+.box.wide .wall{padding:clamp(1.15em,2.2vw,1.65em) clamp(1.15em,2.2vw,1.75em);font-size:clamp(13.5px,calc(var(--h)*.028),16px)}
 .wall::before,.wall::after{content:"";flex:1 0 0px}
 .wall::-webkit-scrollbar{width:6px}
 .wall::-webkit-scrollbar-thumb{background:rgba(255,255,255,.35);border-radius:6px}
 .c{width:100%;opacity:0;transition:opacity .5s ease;position:relative;z-index:2}
 .box.open .c{opacity:1;transition-delay:.35s}
 .kick{color:var(--a);font-weight:800;font-size:.78em;letter-spacing:.2em}
-.wall h2{margin:.18em 0 .38em;font:700 clamp(1.75em,3.4vw,2.35em)/.95 'Clash Display',sans-serif;color:#fff;outline:none}
+.wall h2{margin:.18em 0 .55em;font:700 clamp(1.75em,3.4vw,2.35em)/.95 'Clash Display',sans-serif;color:#fff;outline:none}
 .wall h2 em{font:italic 400 1.08em 'Instrument Serif',serif;color:var(--a)}
 .wall p{margin:0 auto;max-width:36em;line-height:1.45}
 
@@ -123,30 +123,31 @@ body{display:flex;flex-direction:column;height:100dvh;
 .about-copy{display:grid;gap:.45em;max-width:38em;margin:0 auto;font-size:.92em;line-height:1.44}
 .about-copy strong{color:#fff}
 
-/* STAR Case Study Cards (inside wide boxes) */
-.cards{display:grid;gap:1em;text-align:left;max-width:62em;margin:0 auto}
-.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:.9em;padding:clamp(.9em,2vw,1.25em) clamp(1em,2.2vw,1.4em)}
-.card-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.45em;margin-bottom:.3em}
-.card-head h3{margin:0;font:700 clamp(1.1em,1.8vw,1.28em)/1.15 'Clash Display',sans-serif;color:#fff}
+/* STAR Case Study Cards (inside wide boxes — full-width & breathable spacing) */
+.cards{display:grid;gap:1.4em;text-align:left;width:100%;max-width:100%;margin:0 auto}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:.95em;
+  padding:clamp(1.2em,2.4vw,1.75em) clamp(1.3em,2.8vw,2.1em)}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6em;margin-bottom:.5em}
+.card-head h3{margin:0;font:700 clamp(1.15em,1.85vw,1.34em)/1.15 'Clash Display',sans-serif;color:#fff}
 .card-btn{display:inline-block;position:relative;z-index:5;background:var(--a);color:#0b1a40;font-weight:800;font-size:.82em;
-  text-decoration:none;padding:.38em .98em;border-radius:99px;white-space:nowrap;cursor:pointer;pointer-events:auto;transition:filter .2s,transform .2s}
+  text-decoration:none;padding:.4em 1.05em;border-radius:99px;white-space:nowrap;cursor:pointer;pointer-events:auto;transition:filter .2s,transform .2s}
 .card-btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
-.card-tag{display:inline-block;border:1px solid var(--a);color:var(--a);font-weight:700;font-size:.76em;padding:.22em .7em;border-radius:99px;white-space:nowrap}
-.card .card-meta{margin:0 0 .35em;max-width:none;font-size:.85em;color:#b8cbe8;line-height:1.4}
+.card-tag{display:inline-block;border:1px solid var(--a);color:var(--a);font-weight:700;font-size:.76em;padding:.24em .75em;border-radius:99px;white-space:nowrap}
+.card .card-meta{margin:0 0 .45em;max-width:none;font-size:.86em;color:#b8cbe8;line-height:1.45}
 .card .card-meta strong{color:#fff}
-.card .card-badge{margin:0 0 .5em;max-width:none;font-size:.85em;font-weight:700;color:var(--a)}
-.card .card-sub{margin:.55em 0 .18em;max-width:none;font-size:.84em;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff}
-.card .card-text{margin:0;max-width:none;font-size:.9em;line-height:1.52;color:#dbe6f7}
+.card .card-badge{margin:0 0 .85em;max-width:none;font-size:.86em;font-weight:700;color:var(--a)}
+.card .card-sub{margin:1em 0 .35em;max-width:none;font-size:.85em;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff}
+.card .card-text{margin:0;max-width:none;font-size:.92em;line-height:1.65;color:#dbe6f7}
 .card .card-text em{color:#fff;font-style:italic}
 
 /* Media Gallery inside Cards */
-.card-media{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:.75em;margin:.65em 0}
-.card-media.single{grid-template-columns:minmax(0,380px)}
-.media-slot{margin:0;border-radius:.6em;overflow:hidden;border:1px solid rgba(255,255,255,.18);background:rgba(5,12,32,.8)}
+.card-media{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1em;margin:1em 0 1.2em}
+.card-media.single{grid-template-columns:minmax(0,440px)}
+.media-slot{margin:0;border-radius:.65em;overflow:hidden;border:1px solid rgba(255,255,255,.18);background:rgba(5,12,32,.8)}
 .media-slot img,.media-slot video{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:rgba(4,9,24,.9);cursor:zoom-in;transition:transform .25s ease}
-.card-media.single img,.card-media.single video{aspect-ratio:auto;max-height:300px}
+.card-media.single img,.card-media.single video{aspect-ratio:auto;max-height:320px}
 .media-slot img:hover,.media-slot video:hover{transform:scale(1.03)}
-.media-slot figcaption{padding:.38em .6em;font-size:.76em;color:#b8cbe8;background:rgba(255,255,255,.04)}
+.media-slot figcaption{padding:.45em .7em;font-size:.77em;color:#b8cbe8;background:rgba(255,255,255,.04)}
 .media-slot figcaption.empty{padding:1.4em .8em;text-align:center;border:1px dashed rgba(255,255,255,.22);border-radius:.55em;margin:.35em}
 .media-slot code{color:var(--a);font-family:monospace;font-size:.95em}
 
@@ -189,6 +190,8 @@ body{display:flex;flex-direction:column;height:100dvh;
   #claw{top:7px}
   #stage{--lf:.23}
   .hero-profile{flex-direction:column;text-align:center;gap:.7em}
+  .box.wide .wall{padding:1em}
+  .box.wide .card{padding:1em 1.05em}
   .card-media{grid-template-columns:1fr}
 }
 
