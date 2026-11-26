@@ -115,18 +115,20 @@ body{display:flex;flex-direction:column;height:100dvh;
 
 /* Sticky Close Button inside Container */
 .wall-top{position:sticky;top:0;z-index:12;display:flex;justify-content:flex-end;height:0;overflow:visible;pointer-events:none}
-.close-box{pointer-events:auto;width:28px;height:28px;border-radius:50%;
+.close-box{pointer-events:auto;width:30px;height:30px;border-radius:50%;
   border:1px solid rgba(255,255,255,.3);background:rgba(11,26,64,.9);color:#fff;
-  font-size:12px;font-weight:800;line-height:1;cursor:pointer;
+  font-size:13px;font-weight:800;line-height:1;cursor:pointer;
   display:grid;place-items:center;transition:background .2s,transform .2s}
 .close-box:hover{background:rgba(255,255,255,.22);transform:scale(1.06)}
 
-/* Profile Photo in Container 01 (PORTFOLIO — larger & well-proportioned) */
-.hero-profile{display:flex;align-items:center;gap:clamp(1.1em,2.4vw,1.7em);text-align:left;max-width:46em;margin:0 auto;padding:0 .4em}
-.hero-photo{flex:none;width:clamp(7.2em,14vw,9.8em);height:clamp(7.2em,14vw,9.8em);border-radius:1.15em;object-fit:cover;object-position:center top;
-  border:3px solid var(--a);box-shadow:0 12px 28px rgba(0,0,0,.45);background:rgba(255,255,255,.08)}
-.hero-info h2{margin:.1em 0 .28em;font-size:clamp(1.75em,3.2vw,2.25em)}
-.hero-info p{margin:0;max-width:none;font-size:.96em;line-height:1.48}
+/* Profile Photo in Container 01 (PORTFOLIO — prominent portrait & balanced fill) */
+.hero-profile{display:flex;align-items:center;gap:clamp(1.25em,2.6vw,2em);text-align:left;width:100%;max-width:100%;margin:0 auto;padding:.2em 2.2em .2em .6em}
+.hero-photo{flex:none;width:clamp(155px,16.5vw,210px);height:clamp(155px,16.5vw,210px);border-radius:1.25em;object-fit:cover;object-position:center top;
+  border:3.5px solid var(--a);box-shadow:0 14px 32px rgba(0,0,0,.48);background:rgba(255,255,255,.08)}
+.hero-info{flex:1;min-width:0}
+.hero-info .kick{font-size:clamp(12px,1vw,14px)}
+.hero-info h2{margin:.1em 0 .26em;font-size:clamp(2rem,3.6vw,2.95rem);line-height:1.02}
+.hero-info p{margin:0;max-width:none;font-size:clamp(14.5px,1.2vw,17.5px);line-height:1.52;color:#e6eefc}
 
 /* About Me paragraphs (inside compact box) */
 .about-copy{display:grid;gap:.45em;max-width:40em;margin:0 auto;font-size:.93em;line-height:1.45}
@@ -189,6 +191,13 @@ body{display:flex;flex-direction:column;height:100dvh;
   .card-media.single{grid-template-columns:1fr}
 }
 
+/* SHORT LAPTOP SCREENS */
+@media (max-height:660px) and (min-width:681px){
+  .hero-photo{width:clamp(125px,22vh,168px);height:clamp(125px,22vh,168px)}
+  .hero-info h2{font-size:clamp(1.65rem,3vw,2.2rem)}
+  .hero-info p{font-size:clamp(13.5px,1.1vw,15.5px)}
+}
+
 /* PHONES */
 @media (max-width:680px){
   .nav{grid-template-columns:1fr auto;padding:8px 14px;row-gap:4px}
@@ -198,8 +207,10 @@ body{display:flex;flex-direction:column;height:100dvh;
   #rail{top:16px}
   #claw{top:7px}
   #stage{--lf:.23}
-  .hero-profile{flex-direction:column;text-align:center;gap:.75em}
-  .hero-photo{width:6.8em;height:6.8em}
+  .hero-profile{flex-direction:column;text-align:center;gap:.65em;padding:0}
+  .hero-photo{width:112px;height:112px}
+  .hero-info h2{font-size:1.65rem}
+  .hero-info p{font-size:13.5px}
   .box.wide .wall{padding:.8em}
   .box.wide .card{padding:.9em .95em}
   .card-media{grid-template-columns:1fr}
