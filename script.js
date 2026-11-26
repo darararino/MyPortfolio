@@ -2,6 +2,7 @@
   const stage = document.getElementById('stage');
   const claw = document.getElementById('claw');
   const word = document.getElementById('word');
+  const depot = document.getElementById('depot');
   const boxes = [...document.querySelectorAll('.box')];
   const RM = matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -91,34 +92,34 @@
 
   function geo(i, lift) {
     if (lift) {
-      const topSafe = (ph || shortH) ? 62 : 90;
-      const botSafe = (ph || shortH) ? sh - 14 : sh - 58;
-      const availH = Math.max(200, botSafe - topSafe);
-      const availW = sw - (ph ? 20 : 56);
+      const topSafe = (ph || shortH) ? 62 : 92;
+      const botSafe = (ph || shortH) ? sh - 16 : sh - 68;
+      const availH = Math.max(190, botSafe - topSafe);
+      const availW = sw - (ph ? 20 : 64);
       const centerY = topSafe + availH / 2;
 
       if (boxes[i].classList.contains('wide')) {
-        const d = ph ? Math.min(68, availW * .13) : Math.min(105, availW * .10);
-        const doorMargin = ph ? d * .30 : d * 1.35;
-        const w = Math.min(880, Math.max(260, availW * (ph ? .94 : .86) - doorMargin));
-        const h = Math.min(490, Math.max(210, availH * .82));
+        const d = ph ? Math.min(58, availW * .11) : Math.min(82, availW * .085);
+        const doorMargin = ph ? d * .30 : d * 1.45;
+        const w = Math.min(760, Math.max(255, availW * (ph ? .92 : .76) - doorMargin));
+        const h = Math.min(400, Math.max(200, availH * .72));
         return {
           w, h, d,
           x: sw / 2,
           y: centerY,
-          t: `translateZ(18px) rotateX(${ph ? -3 : -4}deg) rotateY(${ph ? -3 : -5}deg) rotateZ(0deg)`
+          t: `translateZ(10px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
         };
       }
 
-      const targetW = ph ? availW * .88 : Math.min(620, availW * .56);
-      const targetH = ph ? Math.min(310, availH * .62) : Math.min(300, availH * .52);
-      const S = Math.max(1.15, Math.min(targetW / W, targetH / H));
+      const targetW = ph ? availW * .86 : Math.min(540, availW * .48);
+      const targetH = ph ? Math.min(270, availH * .54) : Math.min(255, availH * .46);
+      const S = Math.max(1.1, Math.min(targetW / W, targetH / H));
       const w = W * S, h = H * S, d = DP * S;
       return {
         w, h, d,
         x: sw / 2,
         y: centerY,
-        t: `translateZ(18px) rotateX(${ph ? -3 : -4}deg) rotateY(${ph ? -3 : -5}deg) rotateZ(0deg)`
+        t: `translateZ(10px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
       };
     }
 
@@ -147,14 +148,14 @@
     s.zIndex = lift ? 60 : 1 + Math.round(g.y / sh * 50);
   }
 
-  const cTop = g => g.y - g.h / 2 - g.d * .08;
+  const cTop = g => g.y - g.h / 2 - g.d * .07;
   const rodFor = g => Math.max(10, cTop(g) - ((ph || shortH) ? 68 : 88));
 
   function setClaw(x, rod, g, open) {
     claw.style.left = x + 'px';
     claw.style.setProperty('--rod', rod + 'px');
     claw.style.setProperty('--half', (g.w * 1.04 / 2) + 'px');
-    claw.style.setProperty('--fh', Math.min(145, g.h * .46) + 'px');
+    claw.style.setProperty('--fh', Math.min(130, g.h * .44) + 'px');
     claw.classList.toggle('open', open);
   }
 
@@ -173,32 +174,31 @@
 
   async function putBack() {
     const h = held, g = geo(h);
-    T(.65); setOpen(h, false); await sleep(670);
-    T(.85); place(h, false); setClaw(g.x, rodFor(g), g, false); await sleep(870);
-    setClaw(g.x, rodFor(g), g, true); await sleep(260);
+    T(.52); setOpen(h, false); await sleep(540);
+    T(.65); place(h, false); setClaw(g.x, rodFor(g), g, false); await sleep(670);
+    setClaw(g.x, rodFor(g), g, true); await sleep(220);
     boxes[h].classList.remove('lifted'); held = -1;
   }
 
   async function run(i) {
     const prev = held;
     if (prev >= 0) await putBack();
-    if (i === -1 || i === prev) { T(.75); idle(); await sleep(770); return; }
+    if (i === -1 || i === prev) { T(.6); idle(); await sleep(620); return; }
 
     const g = geo(i);
-    T(.75); setClaw(g.x, (ph || shortH) ? 24 : 36, g, true); await sleep(770);
-    T(.56); setClaw(g.x, rodFor(g), g, true); await sleep(580);
-    T(.24); setClaw(g.x, rodFor(g), g, false); await sleep(260);
+    T(.55); setClaw(g.x, (ph || shortH) ? 24 : 36, g, true); await sleep(560);
+    T(.42); setClaw(g.x, rodFor(g), g, true); await sleep(440);
+    T(.20); setClaw(g.x, rodFor(g), g, false); await sleep(210);
 
     const L = geo(i, true);
-    T(.95); boxes[i].classList.add('lifted'); place(i, true); setClaw(L.x, rodFor(L), L, false); await sleep(970);
+    T(.68); boxes[i].classList.add('lifted'); place(i, true); setClaw(L.x, rodFor(L), L, false); await sleep(690);
 
-    held = i; setOpen(i, true); await sleep(780);
+    held = i; setOpen(i, true); await sleep(620);
     boxes[i].querySelector('h2').focus({ preventScroll: true });
   }
 
   function req(i) {
     if (busy) {
-      // Ignore duplicate clicks on the container already being opened so it won't auto-close
       if (i === targetIdx && i !== -1) return;
       next = i;
       return;
@@ -261,7 +261,9 @@
     }
   });
   document.querySelector('.logo').addEventListener('click', e => { e.preventDefault(); if (held >= 0) req(-1); });
-  stage.addEventListener('click', e => { if (!busy && held >= 0 && !e.target.closest('.box')) req(-1); });
+  stage.addEventListener('click', e => {
+    if (!busy && held >= 0 && (e.target === stage || e.target === word || e.target === depot)) req(-1);
+  });
 
   function layout() {
     measure();
