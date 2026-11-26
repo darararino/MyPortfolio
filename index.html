@@ -8,13 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
 <!-- PART 1: NAVIGATION BAR -->
 <header class="nav">
-  <!-- Logo: replace the <span> with <img src="logo.png" alt="Rara"> if you like -->
   <a class="logo" href="#" aria-label="Rara"><span class="logo-text">RARA</span></a>
   <nav aria-label="Sections">
     <button type="button" data-go="1">Projects</button>
@@ -36,14 +35,11 @@
     <div class="head"><i class="fg l"><b></b></i><i class="fg r"><b></b></i></div>
   </div>
 
-  <!-- Faces, doors and buttons of every container are built by script.js.
-       Edit the content inside each .wall below. -->
-
   <!-- CONTAINER 01: HELLO (COMPACT WITH PROFILE PHOTO) -->
   <div class="box" style="--c:#e5322d;--k:#a91f1b;--a:#ff6b63" data-l1="PORT" data-l2="FOLIO" data-tag="RARA" data-name="Portfolio">
     <div class="wall" inert><div class="c">
       <div class="hero-profile">
-        <img class="hero-photo" src="images/rara-profile.jpeg" alt="Aidha Rachma (Rara)">
+        <img class="hero-photo" src="images/rara-profile.jpeg" alt="Aidha Rachma (Rara)" onerror="if(this.src.endsWith('.jpeg')){this.src='images/rara-profile.jpg';}else if(this.src.endsWith('.jpg')){this.src='images/profilelain.jpg';}">
         <div class="hero-info">
           <div class="kick">01 / HELLO</div>
           <h2 tabindex="-1">Hi, I'm <em>Rara.</em></h2>
@@ -141,7 +137,7 @@
           <p class="card-text">In a fast-moving vertical game, players rely on split-second visual cues to dodge obstacles. To solve this, I deliberately contrasted Lokie's soft, organic silhouette against sharp-edged, dark metallic pipe structures so hazards read instantaneously on screen. Behind the scenes, I enforced clean low-poly topology and efficient UV mapping across every modular pipe piece—preventing memory spikes during endless obstacle spawning and keeping player maneuvering consistently smooth.</p>
         </article>
 
-        <!-- Project 04: Baabaa & Beepow (Animated Video Slots) -->
+        <!-- Project 04: Baabaa & Beepow -->
         <article class="card">
           <div class="card-head">
             <h3>Baabaa & Beepow</h3>
@@ -250,7 +246,7 @@
           <p class="card-meta"><strong>Course:</strong> Visual Expression Design · <strong>Timeline:</strong> March 2025 · ~1 Day (Third 3D Project) · <strong>Tools:</strong> Blender</p>
           <div class="card-media single">
             <figure class="media-slot">
-              <img src="images/work-laptop.jpg" alt="Stylized Laptop Hard-Surface Model" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
+              <img src="images/work-laptop.png" alt="Stylized Laptop Hard-Surface Model" onerror="this.style.display='none';this.nextElementSibling.classList.add('empty')">
               <figcaption>Hard-Surface Prop · <code>images/work-laptop.png</code></figcaption>
             </figure>
           </div>
@@ -355,11 +351,11 @@
       <div class="kick">07 / SAY HELLO</div>
       <h2 tabindex="-1">Got an <em>idea?</em></h2>
       <p>Open for 3D Artist internships, freelance commissions, or game collaborations. Let's build something cool together!</p>
-      <!-- Add social / Google Drive / video links by copying one <a> -->
       <div class="pills">
         <a href="mailto:rarachmaidha10@gmail.com" style="--p:#ff6b63">Email Me ↗</a>
+        <a href="LINK_GOOGLE_DRIVE_KAMU" target="_blank" rel="noopener noreferrer" style="--p:#ffd23f">3D Showreel & Drive ↗</a>
         <a href="https://www.linkedin.com/in/aidha-rachma/" target="_blank" rel="noopener noreferrer" style="--p:#6fe0b0">LinkedIn ↗</a>
-        <a href="https://www.instagram.com/rralbum.zip?gwpx=MTVwa3YwMXBsNHFibQ==" target="_blank" rel="noopener noreferrer" style="--p:#8fa7ff">Instagram ↗</a>
+        <a href="LINK_INSTAGRAM_KAMU" target="_blank" rel="noopener noreferrer" style="--p:#8fa7ff">Instagram ↗</a>
       </div>
     </div></div>
   </div>
@@ -375,6 +371,6 @@
   <p id="lb-cap"></p>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>

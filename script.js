@@ -1,28 +1,28 @@
 (() => {
   const stage = document.getElementById('stage');
   const claw = document.getElementById('claw');
+  const word = document.getElementById('word');
   const boxes = [...document.querySelectorAll('.box')];
   const RM = matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Ground-anchored pile layout: [xFraction, rowOffsetInH, rotateX, rotateY, rotateZ]
-  // rowOffsetInH measures distance upward from the bottom floor in multiples of container height (H)
+  // Normalized pile slots: [xNorm (0..1 within safe screen edges), rowFromFloor (in visH), rotateX, rotateY, rotateZ]
   const DESK = [
-    [.49, 1.54, -14, -22, 5],   // 0: PORTFOLIO (upper center)
-    [.14, .62,  -15, 25,  13],  // 1: PROJECTS (bottom left)
-    [.375, .60, -12, -18, -8],  // 2: ABOUT ME (bottom mid-left)
-    [.615, .61, -13, 22,  10],  // 3: THE WORKS (bottom mid-right)
-    [.86, .63,  -15, -26, -12], // 4: TOOL KIT (bottom right)
-    [.26, 1.52, -13, 26,  -10], // 5: SIDE QUEST (upper left)
-    [.73, 1.52, -13, -24, 13]   // 6: SAY HELLO (upper right)
+    [.50,  1.42, -14, -22, 5],   // 0: PORTFOLIO (upper center)
+    [0,    .52,  -15, 24,  12],  // 1: PROJECTS (bottom left)
+    [.335, .51,  -12, -18, -8],  // 2: ABOUT ME (bottom mid-left)
+    [.665, .51,  -13, 20,  9],   // 3: THE WORKS (bottom mid-right)
+    [1,    .52,  -15, -24, -12], // 4: TOOL KIT (bottom right)
+    [.18,  1.40, -13, 24,  -9],  // 5: SIDE QUEST (upper left)
+    [.82,  1.40, -13, -22, 11]   // 6: SAY HELLO (upper right)
   ];
   const PHONE = [
-    [.50, 2.42, -12, -16, 4],   // 0: PORTFOLIO (top)
-    [.19, .62,  -14, 20,  11],  // 1: PROJECTS (bottom left)
-    [.50, .60,  -10, -14, -7],  // 2: ABOUT ME (bottom center)
-    [.81, .62,  -14, 18,  10],  // 3: THE WORKS (bottom right)
-    [.21, 1.52, -12, 22,  -9],  // 4: TOOL KIT (mid left)
-    [.50, 1.50, -12, -18, 7],   // 5: SIDE QUEST (mid center)
-    [.79, 1.52, -14, -20, 11]   // 6: SAY HELLO (mid right)
+    [.50, 2.34, -12, -15, 4],    // 0: PORTFOLIO (top center)
+    [0,   .52,  -13, 18,  9],    // 1: PROJECTS (bottom left)
+    [.50, .51,  -10, -14, -6],   // 2: ABOUT ME (bottom center)
+    [1,   .52,  -13, 16,  8],    // 3: THE WORKS (bottom right)
+    [.03, 1.43, -12, 18,  -8],   // 4: TOOL KIT (mid left)
+    [.50, 1.42, -11, -15, 6],    // 5: SIDE QUEST (mid center)
+    [.97, 1.43, -13, -18, 9]     // 6: SAY HELLO (mid right)
   ];
 
   // Build faces, doors and the real <button> for each container
@@ -51,7 +51,7 @@
     });
   });
 
-  let sw, sh, ph, shortH, W, H, DP, held = -1, busy = false, next = null;
+  let sw, sh, ph, shortH, W, H, DP, visW, visH, held = -1, busy = false, next = null;
 
   function measure() {
     sw = stage.clientWidth;
@@ -59,26 +59,34 @@
     ph = sw <= 680;
     shortH = sh <= 480;
 
-    // Balance width against available horizontal columns and stage height so boxes never crowd or clip
-    const maxByWidth = ph ? sw * .37 : (sw - 48) / 4.75;
-    const maxByHeight = ph ? sh * .21 : sh * .32;
-    const base = Math.min(maxByWidth, maxByHeight);
+    // Fit 4 columns on desktop or 3 columns on mobile within safe screen margins
+    const sidePad = ph ? 12 : 24;
+    const cols = ph ? 3.25 : 4.55;
+    const rows = ph ? 3.05 : 2.10;
+    const maxWByWidth = (sw - sidePad * 2) / cols;
+    const aspectH = ph ? .58 : .43;
+    const maxWByHeight = (sh * (ph ? .54 : .48)) / (rows * aspectH * 1.32);
+    const rawW = Math.min(maxWByWidth, maxWByHeight);
 
-    W = ph ? Math.min(175, Math.max(118, base)) : Math.min(285, Math.max(170, base));
-    H = W * (ph ? .60 : .43);
-    DP = W * (ph ? .52 : .38);
+    W = ph ? Math.min(165, Math.max(96, rawW)) : Math.min(275, Math.max(155, rawW));
+    H = W * aspectH;
+    DP = W * (ph ? .50 : .38);
+
+    // Projected 3D footprint so outer corners never clip past left/right or bottom screen edges
+    visW = W * (ph ? .95 : .91) + DP * (ph ? .30 : .41);
+    visH = H * .97 + DP * .25 + W * .11;
   }
 
   function geo(i, lift) {
     if (lift) {
-      const topSafe = (ph || shortH) ? 62 : 84;
-      const botSafe = (ph || shortH) ? sh - 12 : sh - 54;
+      const topSafe = (ph || shortH) ? 58 : 82;
+      const botSafe = (ph || shortH) ? sh - 12 : sh - 52;
       const availH = Math.max(210, botSafe - topSafe);
       const availW = sw - (ph ? 18 : 44);
       const centerY = topSafe + availH / 2;
 
       if (boxes[i].classList.contains('wide')) {
-        const d = ph ? Math.min(85, availW * .16) : Math.min(145, availW * .13);
+        const d = ph ? Math.min(80, availW * .15) : Math.min(140, availW * .13);
         const doorMargin = ph ? d * .25 : d * .95;
         const w = Math.min(1060, Math.max(260, availW - doorMargin));
         const h = Math.min(620, Math.max(200, availH - d * .18));
@@ -103,11 +111,15 @@
     }
 
     const r = ph ? PHONE[i] : DESK[i];
-    const floorY = sh - (ph ? 14 : 24);
+    const edgePad = ph ? 8 : 18;
+    const minX = visW / 2 + edgePad;
+    const maxX = Math.max(minX, sw - visW / 2 - edgePad);
+    const floorY = sh - (ph ? 14 : 20);
+
     return {
       w: W, h: H, d: DP,
-      x: r[0] * sw,
-      y: floorY - H * r[1],
+      x: minX + r[0] * (maxX - minX),
+      y: floorY - visH * r[1],
       t: `translateZ(0px) rotateX(${r[2]}deg) rotateY(${r[3]}deg) rotateZ(${r[4]}deg)`
     };
   }
@@ -227,6 +239,10 @@
   function layout() {
     measure();
     boxes.forEach((_, i) => place(i, i === held));
+    if (word) {
+      const topBoxY = geo(0).y - visH / 2;
+      word.style.top = Math.max(150, topBoxY - word.offsetHeight * .36) + 'px';
+    }
     if (held >= 0) { const L = geo(held, true); setClaw(L.x, rodFor(L), L, false); } else idle();
   }
   addEventListener('resize', () => {
