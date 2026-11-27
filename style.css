@@ -29,7 +29,7 @@ body{display:flex;flex-direction:column;height:100dvh;
   background-size:44px 44px}
 #stage.snap *{transition:none!important}
 #word{position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);text-align:center;z-index:0;
-  font:700 clamp(50px,15.5vw,255px)/1 'Clash Display',sans-serif;letter-spacing:-.04em;color:#fff;pointer-events:none;user-select:none}
+  font:700 clamp(46px,15vw,255px)/1 'Clash Display',sans-serif;letter-spacing:-.04em;color:#fff;pointer-events:none;user-select:none}
 #depot{position:absolute;left:clamp(14px,3.5vw,48px);top:8px;margin:0;font-size:11px;font-weight:700;letter-spacing:.2em;color:#d7ecff;z-index:3}
 #depot b{color:#ffd23f}
 #hint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:90;pointer-events:none;
@@ -187,7 +187,7 @@ body{display:flex;flex-direction:column;height:100dvh;
 
 /* TABLETS & SMALL LAPTOPS */
 @media (max-width:960px){
-  #stage{--lf:.25}
+  #stage{--lf:.255}
   .card-media.single{grid-template-columns:1fr}
 }
 
@@ -206,14 +206,16 @@ body{display:flex;flex-direction:column;height:100dvh;
   #depot,#hint{display:none}
   #rail{top:16px}
   #claw{top:7px}
-  #stage{--lf:.23}
-  .hero-profile{flex-direction:column;text-align:center;gap:.65em;padding:0}
-  .hero-photo{width:112px;height:112px}
+  #stage{--lf:.25}
+  .wall{padding:.85em .95em;font-size:13.5px}
+  .hero-profile{flex-direction:column;text-align:center;gap:.65em;padding:.2em 0}
+  .hero-photo{width:116px;height:116px}
   .hero-info h2{font-size:1.65rem}
-  .hero-info p{font-size:13.5px}
-  .box.wide .wall{padding:.8em}
+  .hero-info p{font-size:13.5px;line-height:1.45}
+  .box.wide .wall{padding:.8em .75em;font-size:13px}
   .box.wide .card{padding:.9em .95em}
   .card-media{grid-template-columns:1fr}
+  .pills a{font-size:12.5px;padding:.42em .95em}
 }
 
 /* SHORT LANDSCAPE SCREENS */

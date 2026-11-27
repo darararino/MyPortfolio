@@ -6,7 +6,7 @@
   const boxes = [...document.querySelectorAll('.box')];
   const RM = matchMedia('(prefers-reduced-motion: reduce)');
 
-  // Normalized pile slots: [xNorm (0..1 within safe screen edges), rowFromFloor (in visH), rotateX, rotateY, rotateZ]
+  // Desktop: 4 bottom + 3 top staggered pile
   const DESK = [
     [.50,  1.42, -14, -22, 5],   // 0: PORTFOLIO (upper center)
     [0,    .52,  -15, 24,  12],  // 1: PROJECTS (bottom left)
@@ -16,14 +16,16 @@
     [.18,  1.40, -13, 24,  -9],  // 5: SIDE QUEST (upper left)
     [.82,  1.40, -13, -22, 11]   // 6: SAY HELLO (upper right)
   ];
+
+  // Mobile portrait: 4-tier 2-column staggered pyramid (1 - 2 - 2 - 2) so containers are large & never collide
   const PHONE = [
-    [.50, 2.34, -12, -15, 4],    // 0: PORTFOLIO (top center)
-    [0,   .52,  -13, 18,  9],    // 1: PROJECTS (bottom left)
-    [.50, .51,  -10, -14, -6],   // 2: ABOUT ME (bottom center)
-    [1,   .52,  -13, 16,  8],    // 3: THE WORKS (bottom right)
-    [.03, 1.43, -12, 18,  -8],   // 4: TOOL KIT (mid left)
-    [.50, 1.42, -11, -15, 6],    // 5: SIDE QUEST (mid center)
-    [.97, 1.43, -13, -18, 9]     // 6: SAY HELLO (mid right)
+    [.50, 3.08, -12, -14, 3],    // 0: PORTFOLIO (top crown)
+    [.02, .50,  -11, 15,  5],    // 1: PROJECTS (row 1 left)
+    [.98, .50,  -11, -15, -5],   // 2: ABOUT ME (row 1 right)
+    [.05, 1.36, -11, 14,  -4],   // 3: THE WORKS (row 2 left)
+    [.95, 1.36, -11, -14, 4],    // 4: TOOL KIT (row 2 right)
+    [.02, 2.22, -11, 15,  4],    // 5: SIDE QUEST (row 3 left)
+    [.98, 2.22, -11, -15, -4]    // 6: SAY HELLO (row 3 right)
   ];
 
   // Build faces, doors, inner close button, and the real <button> for each container
@@ -72,63 +74,63 @@
     ph = sw <= 680;
     shortH = sh <= 480;
 
-    // Fit 4 columns on desktop or 3 columns on mobile within safe screen margins
-    const sidePad = ph ? 12 : 24;
-    const cols = ph ? 3.25 : 4.55;
-    const rows = ph ? 3.05 : 2.10;
+    // Desktop fits 4 columns; Mobile portrait fits 2 generous columns across 4 rows
+    const sidePad = ph ? 14 : 24;
+    const cols = ph ? 2.38 : 4.70;
+    const rows = ph ? 3.85 : 2.10;
     const maxWByWidth = (sw - sidePad * 2) / cols;
-    const aspectH = ph ? .58 : .43;
-    const maxWByHeight = (sh * (ph ? .54 : .48)) / (rows * aspectH * 1.32);
+    const aspectH = ph ? .55 : .43;
+    const maxWByHeight = (sh * (ph ? .68 : .48)) / (rows * aspectH * 1.28);
     const rawW = Math.min(maxWByWidth, maxWByHeight);
 
-    W = ph ? Math.min(165, Math.max(96, rawW)) : Math.min(275, Math.max(155, rawW));
+    W = ph ? Math.min(185, Math.max(115, rawW)) : Math.min(275, Math.max(155, rawW));
     H = W * aspectH;
-    DP = W * (ph ? .50 : .38);
+    DP = W * (ph ? .44 : .38);
 
-    // Projected 3D footprint so outer corners never clip past left/right or bottom screen edges
-    visW = W * (ph ? .95 : .91) + DP * (ph ? .30 : .41);
-    visH = H * .97 + DP * .25 + W * .11;
+    // Projected 3D footprint including rotateY tilt so outer corners never clip or overlap
+    visW = W * (ph ? .97 : .93) + DP * (ph ? .34 : .43);
+    visH = H * .97 + DP * .25 + W * .10;
   }
 
   function geo(i, lift) {
     if (lift) {
-      const topSafe = (ph || shortH) ? 62 : 90;
+      const topSafe = (ph || shortH) ? 64 : 90;
       const botSafe = (ph || shortH) ? sh - 16 : sh - 62;
       const availH = Math.max(200, botSafe - topSafe);
-      const availW = sw - (ph ? 20 : 60);
+      const availW = sw - (ph ? 22 : 60);
       const centerY = topSafe + availH / 2;
 
       if (boxes[i].classList.contains('wide')) {
-        const d = ph ? Math.min(58, availW * .11) : Math.min(86, availW * .088);
-        const doorMargin = ph ? d * .30 : d * 1.42;
-        const w = Math.min(800, Math.max(255, availW * (ph ? .92 : .78) - doorMargin));
-        const h = Math.min(420, Math.max(210, availH * .75));
+        const d = ph ? Math.min(44, availW * .10) : Math.min(86, availW * .088);
+        const doorMargin = ph ? d * .20 : d * 1.42;
+        const w = Math.min(800, Math.max(265, availW * (ph ? .92 : .78) - doorMargin));
+        const h = Math.min(480, Math.max(300, availH * (ph ? .78 : .75)));
         return {
           w, h, d,
           x: sw / 2,
           y: centerY,
-          t: `translateZ(12px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
+          t: `translateZ(12px) rotateX(${ph ? -2 : -3.5}deg) rotateY(${ph ? -2 : -4.5}deg) rotateZ(0deg)`
         };
       }
 
-      // Generous, crisp sizing for Profile (01), About (03), Toolkit (05), and Contact (07)
+      // Generous sizing for Profile (01), About (03), Toolkit (05), and Contact (07)
       const targetW = ph ? availW * .90 : Math.min(720, availW * .64);
-      const targetH = ph ? Math.min(340, availH * .68) : Math.min(340, availH * .64);
+      const targetH = ph ? Math.min(400, availH * .68) : Math.min(340, availH * .64);
       const S = Math.max(1.25, Math.min(targetW / W, targetH / H));
       const w = W * S, h = H * S, d = DP * S;
       return {
         w, h, d,
         x: sw / 2,
         y: centerY,
-        t: `translateZ(14px) rotateX(${ph ? -2.5 : -3.5}deg) rotateY(${ph ? -2.5 : -4.5}deg) rotateZ(0deg)`
+        t: `translateZ(14px) rotateX(${ph ? -2 : -3.5}deg) rotateY(${ph ? -2 : -4.5}deg) rotateZ(0deg)`
       };
     }
 
     const r = ph ? PHONE[i] : DESK[i];
-    const edgePad = ph ? 8 : 18;
+    const edgePad = ph ? 10 : 18;
     const minX = visW / 2 + edgePad;
     const maxX = Math.max(minX, sw - visW / 2 - edgePad);
-    const floorY = sh - (ph ? 14 : 20);
+    const floorY = sh - (ph ? 16 : 20);
 
     return {
       w: W, h: H, d: DP,
@@ -271,7 +273,9 @@
     boxes.forEach((_, i) => place(i, i === held));
     if (word) {
       const topBoxY = geo(0).y - visH / 2;
-      word.style.top = Math.max(150, topBoxY - word.offsetHeight * .36) + 'px';
+      const wordOffset = ph ? .46 : .36;
+      const minWordTop = ph ? 115 : 150;
+      word.style.top = Math.max(minWordTop, topBoxY - word.offsetHeight * wordOffset) + 'px';
     }
     if (held >= 0) { const L = geo(held, true); setClaw(L.x, rodFor(L), L, false); } else idle();
   }
